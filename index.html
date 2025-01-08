@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BODA VIRGINIA Y LUIS</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fdf5e6;
+            color: #333;
+        }
+        header {
+            background-color: #8b0000;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        header h2 {
+            margin: 10px 0 0 0;
+            font-size: 1.5em;
+        }
+        section {
+            margin: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .confirm-section {
+            text-align: center;
+        }
+        .confirm-section input, .confirm-section button {
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 1em;
+            display: block;
+            width: 80%;
+            max-width: 400px;
+        }
+        button {
+            background-color: #8b0000;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #a52a2a;
+        }
+        .plan-section {
+            text-align: center;
+        }
+        .plan-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .plan-item {
+            background-color: #f8f1e4;
+            padding: 15px;
+            margin: 10px auto;
+            border-left: 5px solid #8b0000;
+            border-radius: 4px;
+            max-width: 500px;
+            text-align: left;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: #8b0000;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>BODA VIRGINIA Y LUIS</h1>
+        <h2>¡Os esperamos!</h2>
+    </header>
+
+    <section class="confirm-section">
+        <h2>Confirma tu asistencia</h2>
+        <form id="confirmation-form">
+            <input type="text" id="name" name="name" placeholder="Nombre completo" required>
+            <input type="number" id="guests" name="guests" placeholder="Número de acompañantes" min="0" required>
+            <button type="submit">Confirmar</button>
+        </form>
+        <p id="confirmation-message" style="color: green; display: none;">¡Gracias por confirmar tu asistencia!</p>
+    </section>
+
+    <section class="plan-section">
+        <h2>Plan del Día</h2>
+        <img src="https://via.placeholder.com/800x400" alt="Lugar del evento">
+        <div class="plan-item">
+            <strong>19:00:</strong> Cóctel de bienvenida
+        </div>
+        <div class="plan-item">
+            <strong>20:30:</strong> Cena principal (plato principal y postre)
+        </div>
+        <div class="plan-item">
+            <strong>22:30:</strong> Barra libre y fiesta
+        </div>
+        <div class="plan-item">
+            <strong>03:00:</strong> Fin del evento
+        </div>
+    </section>
+
+    <section>
+        <h2>¿Cómo llegar?</h2>
+        <p>Dirección: Club Marítimo de Getxo, Bilbao</p>
+        <p><a href="https://goo.gl/maps/QF3V3UxyC1N2" target="_blank">Ver en Google Maps</a></p>
+    </section>
+
+    <footer>
+        <p>© 2025. ¡Estamos deseando compartir este día con vosotros!</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById('confirmation-form');
+        const message = document.getElementById('confirmation-message');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const guests = document.getElementById('guests').value;
+
+            fetch('https://formsubmit.co/malenavarroog@yahoo.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, guests })
+            }).then(response => {
+                if (response.ok) {
+                    message.style.display = 'block';
+                    form.reset();
+                }
+            }).catch(error => {
+                alert('Hubo un error al enviar la confirmación. Por favor, inténtalo de nuevo.');
+            });
+        });
+    </script>
+</body>
+</html>
